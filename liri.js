@@ -26,7 +26,7 @@ switch (
     movieInfo(query);
     break;
   case "do-what-it-says":
-    console.log("NOT DONE YET");
+    doWhatItSays();
     // Takes text inside of random.txt and then use it to call one of LIRI's commands
     break;
 }
@@ -99,4 +99,16 @@ Preview Link:  ${song.preview_url}`;
     .catch(function(err) {
       console.log(err);
     });
+}
+
+// Function for userCommand "do-what-it-says" //
+function doWhatItSays() {
+  fs.readFile("random.txt", "utf8", function(err, data) {
+    if (err) {
+      return console.log(err);
+    }
+    const dataArr = data.split(","); // splits txt data into different indices
+    console.log(dataArr);
+    spotifyThisSong(dataArr[1]);
+  });
 }
